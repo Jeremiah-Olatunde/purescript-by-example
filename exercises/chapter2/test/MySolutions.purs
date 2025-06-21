@@ -12,4 +12,4 @@ circleArea :: Number -> Number
 circleArea radius = pi * radius * radius
 
 leftoverCents :: Int -> Int
-leftoverCents n = rem n 100
+leftoverCents = (flip rem) 100
