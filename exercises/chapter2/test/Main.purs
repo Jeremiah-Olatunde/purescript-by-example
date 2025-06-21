@@ -1,7 +1,7 @@
 module Test.Main where
 
 import Prelude
-import Test.MySolutions (diagonal)
+import Test.MySolutions (diagonal, circleArea)
 import Effect (Effect)
 import Euler (answer)
 import Test.Unit (suite, test)
@@ -21,12 +21,12 @@ main = do
         Assert.equal 5.0 (diagonal 3.0 4.0)
       test "5 12 13" do
         Assert.equal 13.0 (diagonal 5.0 12.0)
-{-  Move this block comment starting point to enable more tests
     suite "circleArea" do
       test "radius 1" do
         Assert.equal 3.141592653589793 (circleArea 1.0)
       test "radius 3" do
         Assert.equal 28.274333882308138 (circleArea 3.0)
+{-  Move this block comment starting point to enable more tests
     suite "leftoverCents" do
       test "23" do
         Assert.equal 23 (leftoverCents 23)
