@@ -83,26 +83,35 @@ main =
         Assert.equal "default"
           $ fromSingleton "default" [ "B", "C", "D" ]
 
-{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Algebraic Data Types" do
       test "Exercise - circleAtOrigin" do
         Assert.equal origin
           $ getCenter circleAtOrigin
+
       test "Exercise - doubleScaleAndCenter" do
         Assert.equal (Circle origin 10.0)
-          $ doubleScaleAndCenter $ Circle origin 5.0
+          $ doubleScaleAndCenter
+          $ Circle origin 5.0
         Assert.equal (Circle origin 10.0)
-          $ doubleScaleAndCenter $ Circle { x: 2.0, y: 2.0 } 5.0
+          $ doubleScaleAndCenter
+          $ Circle { x: 2.0, y: 2.0 } 5.0
         Assert.equal (Rectangle origin 10.0 10.0)
-          $ doubleScaleAndCenter $ Rectangle { x: 0.0, y: 0.0 } 5.0 5.0
+          $ doubleScaleAndCenter
+          $ Rectangle { x: 0.0, y: 0.0 } 5.0 5.0
         Assert.equal (Rectangle origin 40.0 40.0)
-          $ doubleScaleAndCenter $ Rectangle { x: 30.0, y: 30.0 } 20.0 20.0
+          $ doubleScaleAndCenter
+          $ Rectangle { x: 30.0, y: 30.0 } 20.0 20.0
         Assert.equal (Line { x: -4.0, y: -4.0 } { x: 4.0, y: 4.0 })
-          $ doubleScaleAndCenter $ Line { x: -2.0, y: -2.0 } { x: 2.0, y: 2.0 }
+          $ doubleScaleAndCenter
+          $ Line { x: -2.0, y: -2.0 } { x: 2.0, y: 2.0 }
         Assert.equal (Line { x: -4.0, y: -4.0 } { x: 4.0, y: 4.0 })
-          $ doubleScaleAndCenter $ Line { x: 0.0, y: 4.0 } { x: 4.0, y: 8.0 }
-        Assert.equal (Text { x: 0.0, y: 0.0 } "Hello .purs!" )
-          $ doubleScaleAndCenter $ Text { x: 4.0, y: 6.0 } "Hello .purs!"
+          $ doubleScaleAndCenter
+          $ Line { x: 0.0, y: 4.0 } { x: 4.0, y: 8.0 }
+        Assert.equal (Text { x: 0.0, y: 0.0 } "Hello .purs!")
+          $ doubleScaleAndCenter
+          $ Text { x: 4.0, y: 6.0 } "Hello .purs!"
+
+{-  Move this block comment starting point to enable more tests
       test "Exercise - shapeText" do
         Assert.equal (Just "Hello .purs!")
           $ shapeText $ Text origin "Hello .purs!"

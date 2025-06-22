@@ -3,6 +3,7 @@ module Test.MySolutions where
 import Prelude
 
 import Data.Person (Person)
+import Data.Picture (Shape(..), Point)
 
 factorial :: Int -> Int
 factorial n
@@ -31,3 +32,28 @@ sameCity { address: { city: cityA } } { address: { city: cityB } } = cityA == ci
 fromSingleton :: forall a. a -> Array a -> a
 fromSingleton _ [ only ] = only
 fromSingleton default _ = default
+
+origin :: Point
+origin = { x: 0.0, y: 0.0 }
+
+circleAtOrigin :: Shape
+circleAtOrigin = Circle origin 10.0
+
+doubleScaleAndCenter :: Shape -> Shape
+doubleScaleAndCenter (Text _ text) = Text origin text
+doubleScaleAndCenter (Circle _ radius) = Circle origin (radius * 2.0)
+doubleScaleAndCenter (Rectangle _ w h) = Rectangle origin (w * 2.0) (h * 2.0)
+doubleScaleAndCenter (Line start end) = Line startNext endNext
+  where
+  dx :: Number
+  dx = end.x - start.x
+
+  dy :: Number
+  dy = end.y - start.y
+
+  startNext :: Point
+  startNext = { x: (-dx), y: (-dy) }
+
+  endNext :: Point
+  endNext = { x: dx, y: dy }
+
