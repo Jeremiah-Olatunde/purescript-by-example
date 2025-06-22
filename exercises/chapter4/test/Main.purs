@@ -134,17 +134,26 @@ main =
             in
               w
 
-{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Vector Graphics" do
       test "Exercise - area" do
         Assert.equal 50
-          $ round $ area $ Circle origin 4.0
+          $ round
+          $ area
+          $ Circle origin 4.0
         Assert.equal 40
-          $ round $ area $ Rectangle origin 4.0 10.0
+          $ round
+          $ area
+          $ Rectangle origin 4.0 10.0
         Assert.equal 0
-          $ round $ area $ Line origin { x: 2.0, y: 2.0 }
+          $ round
+          $ area
+          $ Line origin { x: 2.0, y: 2.0 }
         Assert.equal 0
-          $ round $ area $ Text origin "Text has no area!"
+          $ round
+          $ area
+          $ Text origin "Text has no area!"
+
+{-  Move this block comment starting point to enable more tests
       test "Exercise - Clipped shapeBounds" do
         Assert.equal { top: -2.0, left: -2.0, right: 2.0, bottom: 2.0 }
           -- Note to users: You'll need to manually import shapeBounds

@@ -2,11 +2,11 @@ module Test.MySolutions where
 
 import Prelude
 
+import ChapterExamples (Amp(..), Volt(..))
+import Data.Maybe (Maybe(Just, Nothing))
+import Data.Number (pi)
 import Data.Person (Person)
 import Data.Picture (Shape(..), Point)
-import Data.Maybe (Maybe(Just, Nothing))
-
-import ChapterExamples (Amp(..), Volt(..))
 
 factorial :: Int -> Int
 factorial n
@@ -68,3 +68,9 @@ newtype Watt = Watt Number
 
 calculateWattage :: Amp -> Volt -> Watt
 calculateWattage (Amp current) (Volt voltage) = Watt (current * voltage)
+
+area :: Shape -> Number
+area (Line _ _) = 0.0
+area (Text _ _) = 0.0
+area (Circle _ r) = pi * r * r
+area (Rectangle _ w h) = w * h
