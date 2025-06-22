@@ -4,6 +4,7 @@ import Prelude
 
 import Data.Person (Person)
 import Data.Picture (Shape(..), Point)
+import Data.Maybe (Maybe(Just, Nothing))
 
 factorial :: Int -> Int
 factorial n
@@ -57,3 +58,6 @@ doubleScaleAndCenter (Line start end) = Line startNext endNext
   endNext :: Point
   endNext = { x: dx, y: dy }
 
+shapeText :: Shape -> Maybe String
+shapeText (Text _ text) = Just text
+shapeText _ = Nothing
