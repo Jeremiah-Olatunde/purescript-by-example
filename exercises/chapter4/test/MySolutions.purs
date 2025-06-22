@@ -13,3 +13,12 @@ binomial n k = fN / (fK * fNK)
   fN = factorial n
   fK = factorial k
   fNK = factorial (n - k)
+
+pascal :: Int -> Int -> Int
+pascal _ 0 = 1
+pascal n k
+  | n == k = 1
+  | otherwise = bA + bB
+      where
+      bA = binomial (n - 1) k
+      bB = binomial (n - 1) (k - 1)
