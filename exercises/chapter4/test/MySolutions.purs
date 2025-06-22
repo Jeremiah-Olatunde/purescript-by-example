@@ -6,6 +6,8 @@ import Data.Person (Person)
 import Data.Picture (Shape(..), Point)
 import Data.Maybe (Maybe(Just, Nothing))
 
+import ChapterExamples (Amp(..), Volt(..))
+
 factorial :: Int -> Int
 factorial n
   | n < 1 = 1
@@ -61,3 +63,8 @@ doubleScaleAndCenter (Line start end) = Line startNext endNext
 shapeText :: Shape -> Maybe String
 shapeText (Text _ text) = Just text
 shapeText _ = Nothing
+
+newtype Watt = Watt Number
+
+calculateWattage :: Amp -> Volt -> Watt
+calculateWattage (Amp current) (Volt voltage) = Watt (current * voltage)
