@@ -44,6 +44,7 @@ circleAtOrigin = Circle origin 10.0
 
 doubleScaleAndCenter :: Shape -> Shape
 doubleScaleAndCenter (Text _ text) = Text origin text
+doubleScaleAndCenter clipped@(Clipped p c w h) = clipped
 doubleScaleAndCenter (Circle _ radius) = Circle origin (radius * 2.0)
 doubleScaleAndCenter (Rectangle _ w h) = Rectangle origin (w * 2.0) (h * 2.0)
 doubleScaleAndCenter (Line start end) = Line startNext endNext
@@ -72,5 +73,6 @@ calculateWattage (Amp current) (Volt voltage) = Watt (current * voltage)
 area :: Shape -> Number
 area (Line _ _) = 0.0
 area (Text _ _) = 0.0
+area (Clipped _ _ _ _) = 0.0
 area (Circle _ r) = pi * r * r
 area (Rectangle _ w h) = w * h
