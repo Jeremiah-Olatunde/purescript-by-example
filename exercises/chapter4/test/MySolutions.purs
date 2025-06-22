@@ -28,3 +28,6 @@ pascal n k
 sameCity :: Person -> Person -> Boolean
 sameCity { address: { city: cityA } } { address: { city: cityB } } = cityA == cityB
 
+fromSingleton :: forall a. a -> Array a -> a
+fromSingleton _ [ only ] = only
+fromSingleton default _ = default

@@ -75,14 +75,15 @@ main =
         Assert.equal false
           $ sameCity amy rose
 
-{-  Move this block comment starting point to enable more tests
       test "Exercise - fromSingleton" do
         Assert.equal "default"
           $ fromSingleton "default" []
         Assert.equal "B"
-          $ fromSingleton "default" ["B"]
+          $ fromSingleton "default" [ "B" ]
         Assert.equal "default"
-          $ fromSingleton "default" ["B", "C", "D"]
+          $ fromSingleton "default" [ "B", "C", "D" ]
+
+{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Algebraic Data Types" do
       test "Exercise - circleAtOrigin" do
         Assert.equal origin
