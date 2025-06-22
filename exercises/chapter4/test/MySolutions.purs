@@ -2,6 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Person (Person)
+
 factorial :: Int -> Int
 factorial n
   | n < 1 = 1
@@ -22,3 +24,7 @@ pascal n k
       where
       bA = binomial (n - 1) k
       bB = binomial (n - 1) (k - 1)
+
+sameCity :: Person -> Person -> Boolean
+sameCity { address: { city: cityA } } { address: { city: cityB } } = cityA == cityB
+

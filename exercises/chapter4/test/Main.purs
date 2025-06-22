@@ -68,13 +68,14 @@ main =
         Assert.equal 1
           $ pascal 5 5
 
-{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Array and Record Patterns" do
       test "Exercise - sameCity" do
         Assert.equal true
           $ sameCity john rose
         Assert.equal false
           $ sameCity amy rose
+
+{-  Move this block comment starting point to enable more tests
       test "Exercise - fromSingleton" do
         Assert.equal "default"
           $ fromSingleton "default" []
