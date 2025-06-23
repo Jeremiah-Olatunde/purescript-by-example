@@ -70,7 +70,7 @@ allTrue :: Array Boolean -> Boolean
 allTrue = foldl (&&) true
 
 fibTailRec :: Int -> Int
-fibTailRec n = fib' 0 1 n
+fibTailRec = fib' 0 1
   where
   fib' :: Int -> Int -> Int -> Int
   fib' x _ 0 = x
