@@ -3,8 +3,7 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Alternative (guard)
-
-import Data.Array (filter, head, length, tail, (..))
+import Data.Array (all, any, cons, filter, head, length, tail, (..))
 import Data.Maybe (fromMaybe)
 import Data.Ord (abs)
 import Test.Examples (factors)
@@ -57,3 +56,12 @@ triples n = do
   c <- b .. n
   guard $ c * c == a * a + b * b
   pure [ a, b, c ]
+
+primeFactors :: Int -> Array Int
+primeFactors n = primeFactors' 2 n
+  where
+  primeFactors' :: Int -> Int -> Array Int
+  primeFactors' _ 1 = []
+  primeFactors' p m
+    | isPrime p && mod m p == 0 = cons p $ primeFactors' p (m / p)
+    | otherwise = primeFactors' (p + 1) m
