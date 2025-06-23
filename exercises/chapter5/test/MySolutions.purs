@@ -2,10 +2,9 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Ord (abs)
-import Data.Array (head, tail, filter, length)
+import Data.Array (concatMap, filter, head, length, tail)
 import Data.Maybe (fromMaybe)
-
+import Data.Ord (abs)
 import Test.Examples (factors)
 
 -- Note to reader: Add your solutions to this file
@@ -42,3 +41,10 @@ isPrime :: Int -> Boolean
 isPrime 0 = false
 isPrime 1 = false
 isPrime n = eq 1 $ length $ factors n
+
+cartesianProduct :: forall a. Array a -> Array a -> Array (Array a)
+cartesianProduct xs ys = do
+  x <- xs
+  y <- ys
+  pure [ x, y ]
+
