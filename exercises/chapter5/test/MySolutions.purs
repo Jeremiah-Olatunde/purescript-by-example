@@ -3,7 +3,7 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Alternative (guard)
-import Data.Array (all, any, cons, filter, head, length, tail, (..))
+import Data.Array (all, any, cons, filter, foldl, head, length, tail, (..))
 import Data.Maybe (fromMaybe)
 import Data.Ord (abs)
 import Test.Examples (factors)
@@ -65,3 +65,6 @@ primeFactors n = primeFactors' 2 n
   primeFactors' p m
     | isPrime p && mod m p == 0 = cons p $ primeFactors' p (m / p)
     | otherwise = primeFactors' (p + 1) m
+
+allTrue :: Array Boolean -> Boolean
+allTrue = foldl (&&) true
