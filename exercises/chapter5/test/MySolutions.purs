@@ -68,3 +68,11 @@ primeFactors n = primeFactors' 2 n
 
 allTrue :: Array Boolean -> Boolean
 allTrue = foldl (&&) true
+
+fibTailRec :: Int -> Int
+fibTailRec n = fib' 0 1 n
+  where
+  fib' :: Int -> Int -> Int -> Int
+  fib' x _ 0 = x
+  fib' x y m = fib' y (x + y) (m - 1)
+

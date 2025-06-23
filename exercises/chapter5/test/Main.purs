@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Path (Path(..), filename, root)
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
-import Test.MySolutions (allTrue, cartesianProduct, countEven, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, primeFactors, squared, triples, (<$?>))
+import Test.MySolutions (allTrue, cartesianProduct, countEven, fibTailRec, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, primeFactors, squared, triples, (<$?>))
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (assert, assertFalse)
 import Test.Unit.Assert as Assert
@@ -152,7 +152,6 @@ main =
         assertFalse "some elements false"
           $ allTrue [ true, false, true ]
 
-{-  Move this block comment starting point to enable more tests
       suite "Exercise - fibTailRec" do
         test "Verify 0" do
           Assert.equal 0
@@ -163,6 +162,8 @@ main =
         test "Verify 44" do
           Assert.equal 701408733
             $ fibTailRec 44
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - reverse" do
         test "Empty Array" do
           Assert.equal ([] :: Array Int)
