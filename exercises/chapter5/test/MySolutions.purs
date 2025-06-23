@@ -30,3 +30,9 @@ squared = map square
 
 keepNonNegative :: Array Number -> Array Number
 keepNonNegative = filter $ (<=) 0.0
+
+infix 8 filter as <$?>
+
+keepNonNegativeRewrite :: Array Number -> Array Number
+keepNonNegativeRewrite = (<$?>) $ (<=) 0.0
+
