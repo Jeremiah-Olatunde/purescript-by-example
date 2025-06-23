@@ -2,7 +2,9 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (concatMap, filter, head, length, tail)
+import Control.Alternative (guard)
+
+import Data.Array (filter, head, length, tail, (..))
 import Data.Maybe (fromMaybe)
 import Data.Ord (abs)
 import Test.Examples (factors)
@@ -48,3 +50,10 @@ cartesianProduct xs ys = do
   y <- ys
   pure [ x, y ]
 
+triples :: Int -> Array (Array Int)
+triples n = do
+  a <- 1 .. n
+  b <- a .. n
+  c <- b .. n
+  guard $ c * c == a * a + b * b
+  pure [ a, b, c ]

@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Path (Path(..), filename, root)
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
-import Test.MySolutions (cartesianProduct, countEven, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, squared, (<$?>))
+import Test.MySolutions (cartesianProduct, countEven, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, squared, triples, (<$?>))
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (assert, assertFalse)
 import Test.Unit.Assert as Assert
@@ -118,7 +118,6 @@ main =
           [ "5", "6" ]
           [ "five", "six" ]
 
-{-  Move this block comment starting point to enable more tests
       suite "Exercise - triples" do
         -- Sorting to allow for any ordering
         test "single element array result" do
@@ -129,6 +128,8 @@ main =
           Assert.equal (sort [ [ 3, 4, 5 ], [ 5, 12, 13 ], [ 6, 8, 10 ] ])
             $ sort
             $ triples 13
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - primeFactors" do
         let
           primeFactorsTest :: Int -> Array Int -> _
