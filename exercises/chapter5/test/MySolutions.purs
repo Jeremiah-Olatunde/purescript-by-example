@@ -23,3 +23,7 @@ countEven ns = add increment $ countEven $ fromMaybe [] $ tail ns
   oneIfEven n = if mod n 2 == 0 then 1 else 0
   increment = fromMaybe 0 $ map oneIfEven $ (head ns)
 
+squared :: Array Number -> Array Number
+squared = map square
+  where
+  square n = n * n

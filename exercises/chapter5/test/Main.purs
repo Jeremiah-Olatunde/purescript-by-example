@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 import Test.Examples
-import Test.MySolutions (isEven, countEven)
+import Test.MySolutions (isEven, countEven, squared)
 import Data.Array (sort)
 import Data.Foldable (sequence_)
 import Data.Maybe (Maybe(..))
@@ -56,7 +56,6 @@ main =
           Assert.equal 2
             $ countEven [ 0, 1, 19, 20 ]
 
-{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Maps, Infix Operators, and Filtering" do
       suite "Exercise - squared" do
         test "Do nothing with empty array" do
@@ -65,6 +64,8 @@ main =
         test "Calculate squares" do
           Assert.equal [ 0.0, 1.0, 4.0, 9.0, 10000.0 ]
             $ squared [ 0.0, 1.0, 2.0, 3.0, 100.0 ]
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - keepNonNegative" do
         test "Do nothing with empty array" do
           Assert.equal []
@@ -72,6 +73,7 @@ main =
         test "Filter negative numbers" do
           Assert.equal [ 0.0, 2.0, 3.0 ]
             $ keepNonNegative [ -1.5, -1.0, 0.0, -0.1, 2.0, 3.0, -4.0 ]
+
       suite "Exercise - <$?> infix operator for filter" do
         test "Define <$?> operator for filter" do
           Assert.equal [ 1, 1 ]
