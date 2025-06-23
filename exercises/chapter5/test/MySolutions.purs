@@ -76,3 +76,5 @@ fibTailRec n = fib' 0 1 n
   fib' x _ 0 = x
   fib' x y m = fib' y (x + y) (m - 1)
 
+reverse :: forall a. Array a -> Array a
+reverse = foldl (flip cons) []
