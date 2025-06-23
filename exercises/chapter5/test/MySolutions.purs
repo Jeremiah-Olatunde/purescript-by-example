@@ -3,8 +3,10 @@ module Test.MySolutions where
 import Prelude
 
 import Data.Ord (abs)
-import Data.Array (head, tail, filter)
+import Data.Array (head, tail, filter, length)
 import Data.Maybe (fromMaybe)
+
+import Test.Examples (factors)
 
 -- Note to reader: Add your solutions to this file
 
@@ -36,3 +38,7 @@ infix 8 filter as <$?>
 keepNonNegativeRewrite :: Array Number -> Array Number
 keepNonNegativeRewrite = (<$?>) $ (<=) 0.0
 
+isPrime :: Int -> Boolean
+isPrime 0 = false
+isPrime 1 = false
+isPrime n = eq 1 $ length $ factors n
