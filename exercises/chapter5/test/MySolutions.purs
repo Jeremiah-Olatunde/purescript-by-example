@@ -29,6 +29,4 @@ squared = map square
   square n = n * n
 
 keepNonNegative :: Array Number -> Array Number
-keepNonNegative = filter isPositive
-  where
-  isPositive = (<=) 0.0
+keepNonNegative = filter $ (<=) 0.0
