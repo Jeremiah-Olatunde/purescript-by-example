@@ -2,7 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
-import Control.Alternative (guard, (<|>))
+import Control.Alternative (guard)
 import Data.Array (all, any, concatMap, cons, filter, fold, foldl, head, last, length, sortBy, tail, (..), (:))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Ord (abs)
@@ -91,10 +91,13 @@ onlyFiles file@(File _ _) = pure file
 onlyFiles directory = concatMap onlyFiles (ls directory)
 
 whereIs :: Path -> String -> Maybe Path
-whereIs (File _ _) _ = Nothing
-whereIs dir@(Directory _ items) target
-  | containsFile target dir = Just dir
-  | otherwise = foldl (<|>) Nothing $ map (flip whereIs $ target) $ items
+whereIs path target = head $ whereIs' path target
+  where
+  whereIs' :: Path -> String -> Array Path
+  whereIs' (File _ _) _ = []
+  whereIs' dir@(Directory _ items) target_
+    | containsFile target_ dir = [ dir ]
+    | otherwise = concatMap (flip whereIs' $ target_) items
 
 containsFile :: String -> Path -> Boolean
 containsFile _ (File _ _) = false
