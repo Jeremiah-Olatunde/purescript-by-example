@@ -91,20 +91,10 @@ onlyFiles file@(File _ _) = pure file
 onlyFiles directory = concatMap onlyFiles (ls directory)
 
 whereIs :: Path -> String -> Maybe Path
-whereIs path target = head $ whereIs' path target
-  where
-  whereIs' :: Path -> String -> Array Path
-  whereIs' (File _ _) _ = []
-  whereIs' dir@(Directory _ items) target_
-    | containsFile target_ dir = [ dir ]
-    | otherwise = concatMap (flip whereIs' $ target_) items
-
-containsFile :: String -> Path -> Boolean
-containsFile _ (File _ _) = false
-containsFile name directory = any ((==) fullPath <<< filename) $ ls directory
-  where
-  fullPath :: String
-  fullPath = filename directory <> name
+whereIs path target = head $ do
+  item <- ls path
+  if filename path <> target == filename item then pure path
+  else fromMaybe [] $ map pure $ whereIs item target
 
 fileInDir :: Array Path -> String -> Boolean
 fileInDir items target = any (contains (Pattern target) <<< filename) items
