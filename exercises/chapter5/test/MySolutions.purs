@@ -3,9 +3,10 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Alternative (guard)
-import Data.Array (all, any, cons, filter, foldl, head, length, tail, (..))
+import Data.Array (all, any, concatMap, cons, filter, foldl, head, length, tail, (..), (:))
 import Data.Maybe (fromMaybe)
 import Data.Ord (abs)
+import Data.Path (Path(..), ls)
 import Test.Examples (factors)
 
 -- Note to reader: Add your solutions to this file
@@ -78,3 +79,12 @@ fibTailRec = fib' 0 1
 
 reverse :: forall a. Array a -> Array a
 reverse = foldl (flip cons) []
+
+allFiles :: Path -> Array Path
+allFiles path = path : do
+  files <- ls path
+  allFiles files
+
+onlyFiles :: Path -> Array Path
+onlyFiles file@(File _ _) = pure file
+onlyFiles directory = concatMap onlyFiles (ls directory)
