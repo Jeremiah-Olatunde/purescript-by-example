@@ -3,10 +3,10 @@ module Test.MySolutions where
 import Prelude
 
 import Control.Alternative (guard)
-import Data.Array (all, any, concatMap, cons, filter, foldl, head, length, tail, (..), (:))
+import Data.Array (all, any, concatMap, cons, filter, foldl, head, last, length, sortBy, tail, (..), (:))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Ord (abs)
-import Data.Path (Path(..), filename, ls)
+import Data.Path (Path(..), filename, ls, size)
 import Data.String (Pattern(..), contains)
 import Test.Examples (factors)
 
@@ -100,3 +100,20 @@ whereIs' (Directory _ items) find = concatMap (\i -> whereIs' i find) items
 
 fileInDir :: Array Path -> String -> Boolean
 fileInDir items target = any (contains (Pattern target) <<< filename) items
+
+largestSmallest :: Path -> Array Path
+largestSmallest = select <<< sortedFiles
+
+select :: forall a. Array a -> Array a
+select [] = []
+select [ first ] = [ first ]
+select xs = fromMaybe [] $ (h <> l)
+  where
+  h = map (pure :: a -> Array a) $ head xs
+  l = map (pure :: a -> Array a) $ last xs
+
+sortedFiles :: Path -> Array Path
+sortedFiles path = sortBy cmpPath $ onlyFiles path
+
+cmpPath :: Path -> Path -> Ordering
+cmpPath px py = compare (size px) (size py)
