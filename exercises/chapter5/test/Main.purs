@@ -9,7 +9,7 @@ import Data.Maybe (Maybe(..))
 import Data.Path (Path(..), filename, root)
 import Data.Tuple.Nested ((/\))
 import Effect (Effect)
-import Test.MySolutions (allTrue, cartesianProduct, countEven, fibTailRec, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, onlyFiles, primeFactors, squared, triples, (<$?>))
+import Test.MySolutions (allTrue, cartesianProduct, countEven, fibTailRec, isEven, isPrime, keepNonNegative, keepNonNegativeRewrite, onlyFiles, primeFactors, squared, triples, whereIs, (<$?>))
 import Test.Unit (TestSuite, suite, test)
 import Test.Unit.Assert (assert, assertFalse)
 import Test.Unit.Assert as Assert
@@ -188,7 +188,6 @@ main =
           $ map filename
           $ onlyFiles root
 
-{-  Move this block comment starting point to enable more tests
       suite "Exercise - whereIs" do
         test "locates a file"
           $ Assert.equal (Just ("/bin/"))
@@ -198,6 +197,8 @@ main =
           $ Assert.equal (Nothing)
           $ map filename
           $ whereIs root "cat"
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - largestSmallest" do
         let
           testls :: String -> Array String -> Path -> TestSuite

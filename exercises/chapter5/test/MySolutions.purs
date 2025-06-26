@@ -4,9 +4,10 @@ import Prelude
 
 import Control.Alternative (guard)
 import Data.Array (all, any, concatMap, cons, filter, foldl, head, length, tail, (..), (:))
-import Data.Maybe (fromMaybe)
+import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Ord (abs)
-import Data.Path (Path(..), ls)
+import Data.Path (Path(..), filename, ls)
+import Data.String (Pattern(..), contains)
 import Test.Examples (factors)
 
 -- Note to reader: Add your solutions to this file
@@ -88,3 +89,14 @@ allFiles path = path : do
 onlyFiles :: Path -> Array Path
 onlyFiles file@(File _ _) = pure file
 onlyFiles directory = concatMap onlyFiles (ls directory)
+
+whereIs :: Path -> String -> Maybe Path
+whereIs path find = head $ whereIs' path find
+
+whereIs' :: Path -> String -> Array Path
+whereIs' (File _ _) _ = []
+whereIs' dir@(Directory _ items) find | fileInDir items find = [ dir ]
+whereIs' (Directory _ items) find = concatMap (\i -> whereIs' i find) items
+
+fileInDir :: Array Path -> String -> Boolean
+fileInDir items target = any (contains (Pattern target) <<< filename) items
