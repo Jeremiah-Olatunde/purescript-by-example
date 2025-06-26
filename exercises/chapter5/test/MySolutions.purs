@@ -2,8 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
-import Control.Alternative (guard)
-import Data.Array (all, any, concatMap, cons, filter, foldl, head, last, length, sortBy, tail, (..), (:))
+import Control.Alternative (guard, (<|>))
+import Data.Array (all, any, concatMap, cons, filter, fold, foldl, head, last, length, sortBy, tail, (..), (:))
 import Data.Maybe (Maybe(..), fromMaybe)
 import Data.Ord (abs)
 import Data.Path (Path(..), filename, ls, size)
@@ -91,12 +91,17 @@ onlyFiles file@(File _ _) = pure file
 onlyFiles directory = concatMap onlyFiles (ls directory)
 
 whereIs :: Path -> String -> Maybe Path
-whereIs path find = head $ whereIs' path find
+whereIs (File _ _) _ = Nothing
+whereIs dir@(Directory _ items) target
+  | containsFile target dir = Just dir
+  | otherwise = foldl (<|>) Nothing $ map (flip whereIs $ target) $ items
 
-whereIs' :: Path -> String -> Array Path
-whereIs' (File _ _) _ = []
-whereIs' dir@(Directory _ items) find | fileInDir items find = [ dir ]
-whereIs' (Directory _ items) find = concatMap (\i -> whereIs' i find) items
+containsFile :: String -> Path -> Boolean
+containsFile _ (File _ _) = false
+containsFile name directory = any ((==) fullPath <<< filename) $ ls directory
+  where
+  fullPath :: String
+  fullPath = filename directory <> name
 
 fileInDir :: Array Path -> String -> Boolean
 fileInDir items target = any (contains (Pattern target) <<< filename) items
@@ -117,3 +122,4 @@ sortedFiles path = sortBy cmpPath $ onlyFiles path
 
 cmpPath :: Path -> Path -> Ordering
 cmpPath px py = compare (size px) (size py)
+
