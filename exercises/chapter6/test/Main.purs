@@ -63,20 +63,25 @@ main =
           Assert.equal (cpx 2.0 3.0)
             $ sub (cpx 3.0 5.0) (cpx 1.0 2.0)
 
-{-  Move this block comment starting point to enable more tests
       suite "Show Shape" do
         test "circle" do
           Assert.equal "(Circle (1.0, 2.0) 3.0)"
-            $ show $ Circle (Point {x: 1.0, y: 2.0}) 3.0
+            $ show
+            $ Circle (Point { x: 1.0, y: 2.0 }) 3.0
         test "rectangle" do
           Assert.equal "(Rectangle (1.0, 2.0) 3.0 4.0)"
-            $ show $ Rectangle (Point {x: 1.0, y: 2.0}) 3.0 4.0
+            $ show
+            $ Rectangle (Point { x: 1.0, y: 2.0 }) 3.0 4.0
         test "line" do
           Assert.equal "(Line (1.0, 2.0) (3.0, 4.0))"
-            $ show $ Line (Point {x: 1.0, y: 2.0}) (Point {x: 3.0, y: 4.0})
+            $ show
+            $ Line (Point { x: 1.0, y: 2.0 }) (Point { x: 3.0, y: 4.0 })
         test "text" do
           Assert.equal "(Text (1.0, 2.0) \"Hello\")"
-            $ show $ Text (Point {x: 1.0, y: 2.0}) "Hello"
+            $ show
+            $ Text (Point { x: 1.0, y: 2.0 }) "Hello"
+
+{-  Move this block comment starting point to enable more tests
     suite "Type Class Constraints" do
       suite "Eq NonEmpty" do
         test "equals" do

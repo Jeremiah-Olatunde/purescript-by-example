@@ -2,7 +2,9 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Generic.Rep (class Generic)
 import Data.Newtype (class Newtype, over2)
+import Data.Show.Generic (genericShow)
 
 -- Note to reader: Add your solutions to this file
 
@@ -54,3 +56,15 @@ instance Semiring Complex where
     imaginary = rx * iy + ix * ry
 
 derive newtype instance complexRing :: Ring Complex
+
+data Shape
+  = Circle Point Number
+  | Line Point Point
+  | Rectangle Point Number Number
+  | Text Point String
+
+derive instance shapeGeneric :: Generic Shape _
+
+instance Show Shape where
+  show = genericShow
+
