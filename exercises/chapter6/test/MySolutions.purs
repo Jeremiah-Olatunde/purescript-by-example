@@ -53,3 +53,4 @@ instance Semiring Complex where
     real = rx * ry - ix * iy
     imaginary = rx * iy + ix * ry
 
+derive newtype instance complexRing :: Ring Complex
