@@ -33,6 +33,8 @@ derive newtype instance complexEq :: Eq Complex
 -- hence we can derive equality for Complex itself
 -- derive instance complexEq :: Eq Complex
 
+-- this would be wrong
+-- derive newtype instance complexNewtype :: Newtype Complex _
 derive instance complexNewtype :: Newtype Complex _
 
 instance Semiring Complex where
