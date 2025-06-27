@@ -143,7 +143,6 @@ main =
             $ foldMap (\x -> show x)
             $ NonEmpty 1 [ 2, 3 ]
 
-{-  Move this block comment starting point to enable more tests
       suite "Foldable OneMore" do
         test "foldl" do
           Assert.equal 123
@@ -158,6 +157,7 @@ main =
             $ foldMap (\x -> show x)
             $ OneMore 1 (2 : 3 : Nil)
 
+{-  Move this block comment starting point to enable more tests
       let
         withDups =
           [ Circle (Point {x: 1.0, y: 2.0}) 3.0

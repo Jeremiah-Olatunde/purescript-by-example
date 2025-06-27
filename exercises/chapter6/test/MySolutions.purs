@@ -2,8 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array (fold, foldMap, foldl, foldr, (:))
-import Data.Foldable (class Foldable)
+import Data.Array ((:))
+import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr)
 import Data.Generic.Rep (class Generic)
 import Data.Newtype (class Newtype, over2)
 import Data.Show.Generic (genericShow)
@@ -117,4 +117,13 @@ instance Foldable NonEmpty where
   foldl f acc (NonEmpty x xs) = foldl f (f acc x) xs
 
   foldMap f (NonEmpty x xs) = f x <> foldMap f xs
+
+data OneMore f a = OneMore a (f a)
+
+instance Foldable f => Foldable (OneMore f) where
+  foldr f acc (OneMore x xs) = f x (foldr f acc xs)
+
+  foldl f acc (OneMore x xs) = foldl f (f acc x) xs
+
+  foldMap f (OneMore x xs) = f x <> foldMap f xs
 
