@@ -2,7 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array ((:))
+import Data.Array (fold, foldMap, foldl, foldr, (:))
+import Data.Foldable (class Foldable)
 import Data.Generic.Rep (class Generic)
 import Data.Newtype (class Newtype, over2)
 import Data.Show.Generic (genericShow)
@@ -109,3 +110,11 @@ instance Ord a => Ord (Extended a) where
   compare _ Infinite = LT
   compare Infinite _ = GT
   compare (Finite x) (Finite y) = compare x y
+
+instance Foldable NonEmpty where
+  foldr f acc (NonEmpty x xs) = f x (foldr f acc xs)
+
+  foldl f acc (NonEmpty x xs) = foldl f (f acc x) xs
+
+  foldMap f (NonEmpty x xs) = f x <> foldMap f xs
+
