@@ -78,3 +78,5 @@ instance (Show a, Show (Array a)) => Show (NonEmpty a) where
 
 derive instance nonEmptyEq :: (Eq a) => Eq (NonEmpty a)
 
+instance Semigroup (Array a) => Semigroup (NonEmpty a) where
+  append (NonEmpty x xs) (NonEmpty y ys) = NonEmpty x (xs <> pure y <> ys)
