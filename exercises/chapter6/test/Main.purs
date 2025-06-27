@@ -157,25 +157,27 @@ main =
             $ foldMap (\x -> show x)
             $ OneMore 1 (2 : 3 : Nil)
 
-{-  Move this block comment starting point to enable more tests
       let
         withDups =
-          [ Circle (Point {x: 1.0, y: 2.0}) 3.0
-          , Circle (Point {x: 3.0, y: 2.0}) 3.0
-          , Circle (Point {x: 1.0, y: 2.0}) 3.0
-          , Circle (Point {x: 2.0, y: 2.0}) 3.0
+          [ Circle (Point { x: 1.0, y: 2.0 }) 3.0
+          , Circle (Point { x: 3.0, y: 2.0 }) 3.0
+          , Circle (Point { x: 1.0, y: 2.0 }) 3.0
+          , Circle (Point { x: 2.0, y: 2.0 }) 3.0
           ]
         noDups =
-          [ Circle (Point {x: 1.0, y: 2.0}) 3.0
-          , Circle (Point {x: 3.0, y: 2.0}) 3.0
-          , Circle (Point {x: 2.0, y: 2.0}) 3.0
+          [ Circle (Point { x: 1.0, y: 2.0 }) 3.0
+          , Circle (Point { x: 3.0, y: 2.0 }) 3.0
+          , Circle (Point { x: 2.0, y: 2.0 }) 3.0
           ]
       test "dedupShapes" do
         Assert.equal noDups
           $ dedupShapes withDups
+
+{-  Move this block comment starting point to enable more tests
       test "dedupShapesFast" do
         Assert.equal noDups
           $ dedupShapesFast withDups
+
     suite "Multi Parameter Type Classes " do
       test "unsafeMaximum" do
         Assert.equal 42

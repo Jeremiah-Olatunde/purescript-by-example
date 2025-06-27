@@ -2,7 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
-import Data.Array ((:))
+import Data.Array (nubEq, (:))
 import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr)
 import Data.Generic.Rep (class Generic)
 import Data.Newtype (class Newtype, over2)
@@ -11,6 +11,8 @@ import Data.Show.Generic (genericShow)
 -- Note to reader: Add your solutions to this file
 
 data Point = Point { x :: Number, y :: Number }
+
+derive instance pointEq :: Eq Point
 
 instance Show Point where
   show (Point { x, y }) = "(" <> show x <> ", " <> show y <> ")"
@@ -127,3 +129,12 @@ instance Foldable f => Foldable (OneMore f) where
 
   foldMap f (OneMore x xs) = f x <> foldMap f xs
 
+instance Eq Shape where
+  eq (Circle xp xr) (Circle yp yr) = eq xp yp && eq xr yr
+  eq (Line xs xe) (Line ys ye) = eq xs ys && eq xe ye
+  eq (Rectangle xp xw xh) (Rectangle yp yw yh) = eq xp yp && eq xw yw && eq xh yh
+  eq (Text xp xs) (Text yp ys) = eq xp yp && eq xs ys
+  eq _ _ = false
+
+dedupShapes :: Array Shape -> Array Shape
+dedupShapes = nubEq
