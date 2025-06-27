@@ -2,6 +2,7 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Array ((:))
 import Data.Generic.Rep (class Generic)
 import Data.Newtype (class Newtype, over2)
 import Data.Show.Generic (genericShow)
@@ -80,3 +81,7 @@ derive instance nonEmptyEq :: (Eq a) => Eq (NonEmpty a)
 
 instance Semigroup (Array a) => Semigroup (NonEmpty a) where
   append (NonEmpty x xs) (NonEmpty y ys) = NonEmpty x (xs <> pure y <> ys)
+
+-- note how the type argument for NonEmpty is not provided
+instance Functor NonEmpty where
+  map mapping (NonEmpty x xs) = NonEmpty (mapping x) (map mapping xs)
