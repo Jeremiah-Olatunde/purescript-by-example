@@ -95,3 +95,17 @@ instance Semigroup (NonEmpty a) where
 -- note how the type argument for NonEmpty is not provided
 instance Functor NonEmpty where
   map mapping (NonEmpty x xs) = NonEmpty (mapping x) (map mapping xs)
+
+data Extended a = Infinite | Finite a
+
+instance Eq a => Eq (Extended a) where
+  eq Infinite Infinite = true
+  eq _ Infinite = false
+  eq Infinite _ = false
+  eq (Finite x) (Finite y) = eq x y
+
+instance Ord a => Ord (Extended a) where
+  compare Infinite Infinite = EQ
+  compare _ Infinite = LT
+  compare Infinite _ = GT
+  compare (Finite x) (Finite y) = compare x y
