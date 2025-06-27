@@ -24,3 +24,4 @@ instance Show Complex where
       <> show imaginary
       <> "i"
 
+derive instance complex :: Eq Complex
