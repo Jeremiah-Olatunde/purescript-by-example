@@ -26,7 +26,13 @@ instance Show Complex where
       <> show imaginary
       <> "i"
 
-derive instance complexEq :: Eq Complex
+-- deligating to the underlying type's instance i.e the Record's Eq
+derive newtype instance complexEq :: Eq Complex
+
+-- compiler has builtin in support for deriving Eq 
+-- hence we can derive equality for Complex itself
+-- derive instance complexEq :: Eq Complex
+
 derive instance complexNewtype :: Newtype Complex _
 
 instance Semiring Complex where
