@@ -25,3 +25,18 @@ instance Show Complex where
       <> "i"
 
 derive instance complex :: Eq Complex
+
+instance Semiring Complex where
+  one = Complex { real: 1.0, imaginary: 0.0 }
+
+  zero = Complex { real: 0.0, imaginary: 0.0 }
+
+  add (Complex { real: rx, imaginary: ix }) (Complex { real: ry, imaginary: iy }) =
+    Complex { real: (rx + ry), imaginary: (ix + iy) }
+
+  mul (Complex { real: rx, imaginary: ix }) (Complex { real: ry, imaginary: iy }) =
+    Complex { real, imaginary }
+    where
+    real = rx * ry - ix * iy
+    imaginary = rx * iy + ix * ry
+
