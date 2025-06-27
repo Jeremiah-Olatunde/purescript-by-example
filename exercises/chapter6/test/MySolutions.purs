@@ -68,3 +68,11 @@ derive instance shapeGeneric :: Generic Shape _
 instance Show Shape where
   show = genericShow
 
+data NonEmpty a = NonEmpty a (Array a)
+
+instance (Show a, Show (Array a)) => Show (NonEmpty a) where
+  show (NonEmpty x xs) = "NonEmpty " <> show x <> " " <> show xs
+
+instance (Eq a, Eq (Array a)) => Eq (NonEmpty a) where
+  eq (NonEmpty a as) (NonEmpty b bs) = eq a b && eq as bs
+

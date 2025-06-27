@@ -81,12 +81,13 @@ main =
             $ show
             $ Text (Point { x: 1.0, y: 2.0 }) "Hello"
 
-{-  Move this block comment starting point to enable more tests
     suite "Type Class Constraints" do
       suite "Eq NonEmpty" do
         test "equals" do
           Assert.equal (NonEmpty 1 [ 2, 3 ])
             $ NonEmpty 1 [ 2, 3 ]
+
+{-  Move this block comment starting point to enable more tests
         test "not equals" do
           Assert.expectFailure "should not be equal"
             $ Assert.equal (NonEmpty 1 [ 2, 3 ])
