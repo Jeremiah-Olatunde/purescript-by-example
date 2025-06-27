@@ -3,10 +3,13 @@ module Test.MySolutions where
 import Prelude
 
 import Data.Array (nub, nubEq, (:))
-import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr)
+import Data.Array as Array
+import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
+import Data.Maybe (Maybe(..), fromJust)
 import Data.Newtype (class Newtype, over2)
 import Data.Show.Generic (genericShow)
+import Data.String.CodeUnits as String
 
 -- Note to reader: Add your solutions to this file
 
@@ -144,3 +147,6 @@ derive instance shapeOrd :: Ord Shape
 
 dedupShapesFast :: Array Shape -> Array Shape
 dedupShapesFast = nub
+
+unsafeMaximum :: Partial => Array Int -> Int
+unsafeMaximum = fromJust <<< maximum
