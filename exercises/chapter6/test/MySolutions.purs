@@ -75,11 +75,21 @@ instance (Show a, Show (Array a)) => Show (NonEmpty a) where
   show (NonEmpty x xs) = "NonEmpty " <> show x <> " " <> show xs
 
 -- instance (Eq a, Eq (Array a)) => Eq (NonEmpty a) where
---   eq (NonEmpty a as) (NonEmpty b bs) = eq a b && eq as bs
+-- note: see below
+instance Eq a => Eq (NonEmpty a) where
+  eq (NonEmpty a as) (NonEmpty b bs) = eq a b && eq as bs
 
-derive instance nonEmptyEq :: (Eq a) => Eq (NonEmpty a)
+-- derive instance nonEmptyEq :: (Eq a) => Eq (NonEmpty a)
 
-instance Semigroup (Array a) => Semigroup (NonEmpty a) where
+-- note
+-- instance Semigroup (Array a) => Semigroup (NonEmpty a) where
+-- Array already has a semigroup instance defined for all `a`
+-- this adds a constraint that the sepicify type of a in NonEmpty a
+-- have a coresponding Semigroup Array a instance
+-- so NonEmpty Int have an Semigroup (Array Int)
+-- but Semigroup is already defined for all a so it is redunant
+-- still works
+instance Semigroup (NonEmpty a) where
   append (NonEmpty x xs) (NonEmpty y ys) = NonEmpty x (xs <> pure y <> ys)
 
 -- note how the type argument for NonEmpty is not provided
