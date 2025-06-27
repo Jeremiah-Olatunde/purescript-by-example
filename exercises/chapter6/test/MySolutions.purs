@@ -2,6 +2,8 @@ module Test.MySolutions where
 
 import Prelude
 
+import Data.Newtype (class Newtype, over2)
+
 -- Note to reader: Add your solutions to this file
 
 data Point = Point { x :: Number, y :: Number }
@@ -24,15 +26,18 @@ instance Show Complex where
       <> show imaginary
       <> "i"
 
-derive instance complex :: Eq Complex
+derive instance complexEq :: Eq Complex
+derive instance complexNewtype :: Newtype Complex _
 
 instance Semiring Complex where
   one = Complex { real: 1.0, imaginary: 0.0 }
 
   zero = Complex { real: 0.0, imaginary: 0.0 }
 
-  add (Complex { real: rx, imaginary: ix }) (Complex { real: ry, imaginary: iy }) =
-    Complex { real: (rx + ry), imaginary: (ix + iy) }
+  -- add (Complex { real: rx, imaginary: ix }) (Complex { real: ry, imaginary: iy }) =
+  --   Complex { real: (rx + ry), imaginary: (ix + iy) }
+
+  add = over2 Complex (+)
 
   mul (Complex { real: rx, imaginary: ix }) (Complex { real: ry, imaginary: iy }) =
     Complex { real, imaginary }
