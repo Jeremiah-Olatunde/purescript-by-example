@@ -155,6 +155,7 @@ unsafeMaximum = fromJust <<< maximum
 newtype Multiply = Multiply Int
 
 derive instance multipyNewtype :: Newtype Multiply _
+derive instance multipyEq :: Eq Multiply
 
 instance Show Multiply where
   show (Multiply x) = "Multiply " <> show x
@@ -187,3 +188,12 @@ instance Action Multiply String where
 instance (Action Multiply a) => Action Multiply (Array a) where
   act mx xs = map (act mx) xs
 
+newtype Self m = Self m
+
+derive newtype instance selfEq :: (Eq a) => Eq (Self a)
+
+instance Show m => Show (Self m) where
+  show (Self m) = "Self " <> show m
+
+instance Monoid m => Action m (Self m) where
+  act ma (Self mb) = Self $ ma <> mb
