@@ -7,7 +7,7 @@ import Data.Array as Array
 import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..), fromJust)
-import Data.Newtype (class Newtype, over2)
+import Data.Newtype (class Newtype, over, over2, unwrap)
 import Data.Show.Generic (genericShow)
 import Data.String.CodeUnits as String
 
@@ -153,6 +153,11 @@ unsafeMaximum = fromJust <<< maximum
 
 newtype Multiply = Multiply Int
 
+derive instance multipyNewtype :: Newtype Multiply _
+
+instance Show Multiply where
+  show (Multiply x) = "Multiply " <> show x
+
 instance Semigroup Multiply where
   append (Multiply n) (Multiply m) = Multiply (n * m)
 
@@ -167,5 +172,10 @@ instance Action Multiply Int where
   -- act (Multiply x) y = x * y
 
   -- implementation 2
-  act mx x = case mx <> Multiply x of
-    Multiply result -> result
+  -- act mx x = case mx <> Multiply x of
+  --   Multiply result -> result
+
+  -- implementation 3
+  act mx x =
+    (unwrap :: Multiply -> Int)
+      $ (over Multiply ((*) x) mx :: Multiply)
