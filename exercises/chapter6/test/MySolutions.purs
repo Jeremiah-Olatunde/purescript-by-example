@@ -205,3 +205,15 @@ arrayHasDuplicates xs = hasDupeValue && hasDupeHash
   l = length xs
   hasDupeValue = (/=) l $ length $ nubByEq (==) xs
   hasDupeHash = (/=) l $ length $ nubByEq hashEqual xs
+
+newtype Hour = Hour Int
+
+instance Show Hour where
+  show (Hour h) = "Hour " <> show h
+
+instance Eq Hour where
+  eq (Hour n) (Hour m) = mod n 12 == mod m 12
+
+instance Hashable Hour where
+  hash (Hour h) = hash $ mod h 12
+

@@ -275,19 +275,18 @@ main =
           Assert.equal false
             $ arrayHasDuplicates [ 65536, 1, 2, 3 ]
 
-{-  Move this block comment starting point to enable more tests
       suite "Hashable Hour" do
         test "match" do
           Assert.equal (hash $ Hour 1)
             $ hash
             $ Hour 13
+
         test "mismatch" do
           Assert.expectFailure "should not be equal"
             $ Assert.equal (hash $ Hour 1)
             $ hash
             $ Hour 14
 
--}
 runChapterExamples :: TestSuite
 runChapterExamples =
   test "Todo for book maintainers - Add tests for chapter examples" do
