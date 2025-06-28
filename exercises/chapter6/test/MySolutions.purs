@@ -163,5 +163,9 @@ class Monoid m <= Action m a where
   act :: m -> a -> a
 
 instance Action Multiply Int where
-  act (Multiply x) y = x * y
+  -- implementation 1
+  -- act (Multiply x) y = x * y
 
+  -- implementation 2
+  act mx x = case mx <> Multiply x of
+    Multiply result -> result
