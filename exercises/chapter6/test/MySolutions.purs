@@ -1,8 +1,9 @@
 module Test.MySolutions where
 
+import Data.Hashable
 import Prelude
 
-import Data.Array (nub, nubEq, (:))
+import Data.Array (length, nub, nubByEq, nubEq, null, (:))
 import Data.Array as Array
 import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
@@ -197,3 +198,10 @@ instance Show m => Show (Self m) where
 
 instance Monoid m => Action m (Self m) where
   act ma (Self mb) = Self $ ma <> mb
+
+arrayHasDuplicates :: forall a. Hashable a => Array a -> Boolean
+arrayHasDuplicates xs = hasDupeValue && hasDupeHash
+  where
+  l = length xs
+  hasDupeValue = (/=) l $ length $ nubByEq (==) xs
+  hasDupeHash = (/=) l $ length $ nubByEq hashEqual xs

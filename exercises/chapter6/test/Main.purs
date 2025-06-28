@@ -263,7 +263,6 @@ main =
           Assert.equal (Self (Multiply 12))
             $ act m2 a
 
-{-  Move this block comment starting point to enable more tests
     suite "A Type Class for Hashes" do
       suite "arrayHasDuplicates" do
         test "no dupe" do
@@ -275,6 +274,8 @@ main =
         test "only hash dupe" do
           Assert.equal false
             $ arrayHasDuplicates [ 65536, 1, 2, 3 ]
+
+{-  Move this block comment starting point to enable more tests
       suite "Hashable Hour" do
         test "match" do
           Assert.equal (hash $ Hour 1)
