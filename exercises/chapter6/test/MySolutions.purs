@@ -7,6 +7,7 @@ import Data.Array as Array
 import Data.Foldable (class Foldable, fold, foldMap, foldl, foldr, maximum)
 import Data.Generic.Rep (class Generic)
 import Data.Maybe (Maybe(..), fromJust)
+import Data.Monoid (power)
 import Data.Newtype (class Newtype, over, over2, unwrap)
 import Data.Show.Generic (genericShow)
 import Data.String.CodeUnits as String
@@ -179,3 +180,6 @@ instance Action Multiply Int where
   act mx x =
     (unwrap :: Multiply -> Int)
       $ (over Multiply ((*) x) mx :: Multiply)
+
+instance Action Multiply String where
+  act (Multiply times) string = power string times
