@@ -217,7 +217,6 @@ main =
           Assert.equal "foofoofoo"
             $ act m1 a
 
-{-  Move this block comment starting point to enable more tests
       suite "Action m (Array a)" do
         suite "Action Multiply (Array Int)" do
           let
@@ -229,8 +228,9 @@ main =
             Assert.equal (act m1 (act m2 a))
               $ act (m1 <> m2) a
           test "concrete" do
-            let expectOneOf = [[ 0, 0, 1], [ 3, 6, 9 ], [ 1, 8, 27 ]]
-                got = act m1 a
+            let
+              expectOneOf = [ [ 0, 0, 1 ], [ 3, 6, 9 ], [ 1, 8, 27 ] ]
+              got = act m1 a
             Assert.assert ("expected one of " <> show expectOneOf <> ", got " <> show got)
               $ elem got expectOneOf
         suite "Action Multiply (Array String)" do
@@ -249,6 +249,8 @@ main =
               , "bazbazbaz"
               ]
               $ act m1 a
+
+{-  Move this block comment starting point to enable more tests
       suite "Action m (Self m)" do
         let
           a = Self m1

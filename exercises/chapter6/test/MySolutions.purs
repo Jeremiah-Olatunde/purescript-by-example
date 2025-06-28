@@ -183,3 +183,7 @@ instance Action Multiply Int where
 
 instance Action Multiply String where
   act (Multiply times) string = power string times
+
+instance (Action Multiply a) => Action Multiply (Array a) where
+  act mx xs = map (act mx) xs
+
