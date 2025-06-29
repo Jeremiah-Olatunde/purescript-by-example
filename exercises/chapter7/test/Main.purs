@@ -110,11 +110,10 @@ main =
         stateTest "C3" false
         stateTest "C$" false
 
-{-  Move this block comment starting point to enable more tests
       suite "Exercise - nonEmptyRegex" do
         let
           nonEmptyTest str exp = test str do
-              Assert.equal exp $ R.test nonEmptyRegex str
+            Assert.equal exp $ R.test nonEmptyRegex str
         nonEmptyTest "Houston" true
         nonEmptyTest "My Street" true
         nonEmptyTest "Ñóñá" true
@@ -123,6 +122,8 @@ main =
         nonEmptyTest "" false
         nonEmptyTest " " false
         nonEmptyTest "\t" false
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - validateAddressImproved" do
         test "Valid" do
           let

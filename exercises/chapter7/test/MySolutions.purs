@@ -39,3 +39,7 @@ combineMaybe (Just fa) = map Just fa
 
 stateRegex :: Regex
 stateRegex = unsafeRegex "^[a-z][a-z]$" (global <> ignoreCase)
+
+nonEmptyRegex :: Regex
+nonEmptyRegex = unsafeRegex ".*\\S.*" (global)
+
