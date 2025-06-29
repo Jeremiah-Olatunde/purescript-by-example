@@ -57,3 +57,19 @@ validateAddressImproved a = ado
   city <- validateWithRegex nonEmptyRegex "City" a.city
   state <- validateWithRegex stateRegex "State" a.state
   in address street city state
+
+data Tree a = Leaf | Branch (Tree a) a (Tree a)
+
+derive instance treeEq :: (Eq a) => Eq (Tree a)
+
+instance (Show a) => Show (Tree a) where
+  show Leaf = "Leaf"
+  show (Branch left value right) =
+    "(Branch"
+      <> " "
+      <> show left
+      <> " "
+      <> show value
+      <> " "
+      <> show right
+      <> ")"
