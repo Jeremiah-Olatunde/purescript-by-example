@@ -1,7 +1,7 @@
 module Test.MySolutions where
 
 import Prelude
-import Data.Maybe (Maybe)
+import Data.Maybe (Maybe(..))
 import Control.Apply (lift2)
 
 -- Note to reader: Add your solutions to this file
@@ -30,3 +30,6 @@ subApply = lift2 (-)
 divApply :: forall f a. Apply f => EuclideanRing a => f a -> f a -> f a
 divApply = lift2 (/)
 
+combineMaybe :: forall f a. Applicative f => Maybe (f a) -> f (Maybe a)
+combineMaybe Nothing = pure Nothing
+combineMaybe (Just fa) = map Just fa
