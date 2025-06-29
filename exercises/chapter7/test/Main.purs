@@ -98,18 +98,19 @@ main =
             Assert.equal (Nothing : Nil)
               $ combineMaybe (Nothing :: Maybe (List Char))
 
-{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Applicative Validation" do
       suite "Exercise - stateRegex" do
         let
           stateTest str exp = test str do
-             Assert.equal exp $ R.test stateRegex str
+            Assert.equal exp $ R.test stateRegex str
         stateTest "CA" true
         stateTest "Ca" true
         stateTest "C" false
         stateTest "CAA" false
         stateTest "C3" false
         stateTest "C$" false
+
+{-  Move this block comment starting point to enable more tests
       suite "Exercise - nonEmptyRegex" do
         let
           nonEmptyTest str exp = test str do

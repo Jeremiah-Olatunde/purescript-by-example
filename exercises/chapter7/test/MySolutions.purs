@@ -3,6 +3,9 @@ module Test.MySolutions where
 import Prelude
 import Data.Maybe (Maybe(..))
 import Control.Apply (lift2)
+import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.String.Regex.Flags (global, ignoreCase)
+import Data.String.Regex (Regex)
 
 -- Note to reader: Add your solutions to this file
 
@@ -33,3 +36,6 @@ divApply = lift2 (/)
 combineMaybe :: forall f a. Applicative f => Maybe (f a) -> f (Maybe a)
 combineMaybe Nothing = pure Nothing
 combineMaybe (Just fa) = map Just fa
+
+stateRegex :: Regex
+stateRegex = unsafeRegex "^[a-z][a-z]$" (global <> ignoreCase)
