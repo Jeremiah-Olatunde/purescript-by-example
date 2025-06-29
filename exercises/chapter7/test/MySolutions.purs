@@ -1,11 +1,14 @@
 module Test.MySolutions where
 
 import Prelude
-import Data.Maybe (Maybe(..))
+
 import Control.Apply (lift2)
-import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.AddressBook (Address, address)
+import Data.Maybe (Maybe(..))
+import Data.String.Regex (Regex, test)
 import Data.String.Regex.Flags (global, ignoreCase)
-import Data.String.Regex (Regex)
+import Data.String.Regex.Unsafe (unsafeRegex)
+import Data.Validation.Semigroup (V, invalid)
 
 -- Note to reader: Add your solutions to this file
 
@@ -43,3 +46,14 @@ stateRegex = unsafeRegex "^[a-z][a-z]$" (global <> ignoreCase)
 nonEmptyRegex :: Regex
 nonEmptyRegex = unsafeRegex ".*\\S.*" (global)
 
+validateWithRegex :: Regex -> String -> String -> V (Array String) String
+validateWithRegex regex fieldName unvalidated =
+  if test regex unvalidated then pure unvalidated
+  else invalid [ "Field '" <> fieldName <> "' did not match the required format" ]
+
+validateAddressImproved :: Address -> V (Array String) Address
+validateAddressImproved a = ado
+  street <- validateWithRegex nonEmptyRegex "Street" a.street
+  city <- validateWithRegex nonEmptyRegex "City" a.city
+  state <- validateWithRegex stateRegex "State" a.state
+  in address street city state

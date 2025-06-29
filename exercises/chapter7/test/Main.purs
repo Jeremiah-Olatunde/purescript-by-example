@@ -123,7 +123,6 @@ main =
         nonEmptyTest " " false
         nonEmptyTest "\t" false
 
-{-  Move this block comment starting point to enable more tests
       suite "Exercise - validateAddressImproved" do
         test "Valid" do
           let
@@ -142,6 +141,8 @@ main =
           Assert.equal (invalid [ "Field 'State' did not match the required format" ])
             $ validateAddressImproved
             $ address "22 Fake St" "Fake City" "C3"
+
+{-  Move this block comment starting point to enable more tests
     suite "Exercise Group - Traversable Functors" do
       suite "Exercise - Tree Show and Eq" do
         let
