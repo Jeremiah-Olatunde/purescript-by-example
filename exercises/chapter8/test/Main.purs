@@ -45,7 +45,6 @@ main =
           $ Assert.equal [ 0, 1, 2, 3, 10, 11, 12, 13 ]
           $ possibleSums [ 1, 2, 10 ]
 
-{-  Move this block comment starting point to enable more tests
       suite "filterM" do
         suite "Array Monad" do
           let
@@ -78,6 +77,8 @@ main =
             $ filterM
                 onlyPositiveEvenIntegers
                 (2 : 3 : 4 : Nil)
+
+{-  Move this block comment starting point to enable more tests
       suite "exceptionDivide" do
         test "6 / 3"
           $ Assert.equal 2
