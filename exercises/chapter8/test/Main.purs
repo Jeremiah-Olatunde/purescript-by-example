@@ -37,7 +37,6 @@ main =
           $ Assert.equal (Just 4)
           $ third [ 1, 2, 4, 3 ]
 
-{-  Move this block comment starting point to enable more tests
       suite "possibleSums" do
         test "[]"
           $ Assert.equal [ 0 ]
@@ -45,6 +44,8 @@ main =
         test "[1, 2, 10]"
           $ Assert.equal [ 0, 1, 2, 3, 10, 11, 12, 13 ]
           $ possibleSums [ 1, 2, 10 ]
+
+{-  Move this block comment starting point to enable more tests
       suite "filterM" do
         suite "Array Monad" do
           let
